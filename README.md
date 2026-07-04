@@ -63,3 +63,5 @@ This course is divided into logical chapters that progress from basic concepts t
 1. Clone the repository:
    ```bash
    git clone https://github.com/codebydoble/eloquent-javascript-course.git
+
+Built with ❤️ for the JavaScript community.
