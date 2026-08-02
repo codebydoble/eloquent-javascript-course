@@ -24,7 +24,20 @@ const regExpE5 = new RegExp(/\s[.,:;]/, "g")
 const regExpE6 = new RegExp(/\b[A-Za-z]{7,}\b/, "g")
 
 // 7. [] A word without the letter e (or E)
-const regExpE7 = new RegExp(/[^eE][a-df-zA-DF-Z]+|[^eE]\b/, "g")
+const regExpE7 = new RegExp(/\b[^eE\W]+\b/, "g")
+
+// E7 — word WITHOUT e or E
+// YOUR REGEX: /[^eE][a-df-zA-DF-Z]+|[^eE]\b/
+// PROBLEM: Matches characters inside words that contain e — not whole-word check.
+// "earth" → student's regex matches "rth" (inside earth, no e) → UNEXPECTED MATCH
+// "BEET" → matches "B" because B is [^eE] → UNEXPECTED MATCH
+//
+// FIX: \b[^eE\W]+\b
+//   \b          word boundary
+//   [^eE\W]+    one or more chars that are NOT e, NOT E, NOT non-word (\W)
+//               [^eE\W] = word characters minus e and E = only letters/digits without e
+//   \b          word boundary
+//   This only matches COMPLETE words that contain zero e or E characters.
 
 verify(/ca[rt]/, ["my car", "bad cats"], ["camper", "high art"])
 
